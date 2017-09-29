@@ -25,9 +25,15 @@ def get_date(submission):
     time_current = datetime.datetime.utcnow()
     inbetween = time_current - time_created
     inbetween_total = int(inbetween.total_seconds()) / 60
+    fr = open("used_posts.txt", "r")
     # If submission is older than 10 minutes, return True, if it isn't, return false
     if inbetween_total > x and submission._flair == None:
+      if submission.url not in fr.read():
+        f = open("used_posts.txt", "w")
+        f.write(submission.url)
         return True
+      else:
+        print("Post already done, skipping")
     else:
         return False
 
