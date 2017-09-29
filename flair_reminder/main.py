@@ -20,8 +20,8 @@ reddit = praw.Reddit(user_agent='https://github.com/hkyq/r_requestabot/new/maste
                      username='', password='')
 
 def get_date(submission):
-    time = submission.created
-    time_created = datetime.datetime.fromtimestamp(time)
+    time = submission.created_utc
+    time_created = datetime.datetime.utcfromtimestamp(time)
     time_current = datetime.datetime.utcnow()
     inbetween = time_current - time_created
     inbetween_total = int(inbetween.total_seconds()) / 60
@@ -32,8 +32,9 @@ def get_date(submission):
         return False
 
 subreddit = reddit.subreddit('hkyq')
-for submission in subreddit.stream.submissions():
-    if get_date(submission) == True:
-        submission.author.message(pm_subject, pm_body.format(submission.author, submission.permalink))
-        print("Post found: https://reddit.com{}".format(submission.permalink))
+while True:
+    for submission in subreddit.stream.submissions():
+        if get_date(submission) == True:
+            submission.author.message(pm_subject, pm_body.format(submission.author, submission.permalink))
+            print("Post found: https://reddit.com{}".format(submission.permalink))
 
