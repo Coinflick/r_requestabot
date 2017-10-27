@@ -10,3 +10,5 @@ class main_cog():
     async def code(self, ctx):
         self.bot.send_message(ctx.message.author, str(random.randint(1000, 9000)))
         
+def setup(bot):
+    bot.add_cog(main_cog(bot))
