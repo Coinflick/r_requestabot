@@ -17,7 +17,7 @@ class main_cog():
 
     @commands.command()
     async def roles(self):
-            msg = await self.bot.say("Reageer met \U0001F1E7\U0001F1EA om de 'België' rank te ontvangen, of \U0001F1F3\U0001F1F1 om de 'Nederland' rank te ontvangen. **Je mag ALLEEN jou gewilde emoji aanklikken als 2 seconden zijn gepas$
+            msg = await self.bot.say("Reageer met \U0001F1E7\U0001F1EA om de 'België' rank te ontvangen, of \U0001F1F3\U0001F1F1 om de 'Nederland' rank te ontvangen. **Je mag ALLEEN jou gewilde emoji aanklikken als 2 seconden zijn gepas")
             await self.bot.add_reaction(msg, "\U0001F1E7\U0001F1EA")
             await self.bot.add_reaction(msg, "\U0001F1F3\U0001F1F1")
             while True:
