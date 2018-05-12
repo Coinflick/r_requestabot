@@ -42,25 +42,17 @@ class main_cog():
     @commands.command(pass_context=True)
     async def get(self, ctx, type):
         msg = await self.bot.say("Please wait...")
+        try:
+            pm = await self.bot.send_message(ctx.message.author, "Please wait, this message will update shortly with the information.")
+        except:
+            await self.bot.edit_message(msg, "I couldn't PM you, maybe your privacy settings on this server restrict that? " + ctx.message.author.mention)
+            return False
         if 'bronze' in [x.name for x in ctx.message.author.roles]:
-            try:
-                await self.bot.send_message(ctx.message.author, get_acc("bronze",type))
-                await self.bot.edit_message(msg, "PM sent")
-            except:
-                await self.bot.edit_message(msg, "I couldn't PM you, maybe your privacy settings on this server restrict that?")
+            await self.bot.edit_message(pm, get_acc("bronze",type))
         elif 'silver' in [x.name for x in ctx.message.author.roles]:
-            try:
-                await self.bot.send_message(ctx.message.author, get_acc("bronze",type))
-                await self.bot.edit_message(msg, "PM sent")
-            except:
-                await self.bot.edit_message(msg, "I couldn't PM you, maybe your privacy settings on this server restrict that?")
+            await self.bot.edit_message(pm, get_acc("silver",type))
         elif 'diamond' in [x.name for x in ctx.message.author.roles]:
-            try:
-                await self.bot.send_message(ctx.message.author, get_acc("bronze",type))
-                await self.bot.edit_message(msg, "PM sent")
-            except:
-                await self.bot.edit_message(msg, "I couldn't PM you, maybe your privacy settings on this server restrict that?")
-
+            await self.bot.edit_message(pm, get_acc("diamond",type))
 
 def setup(bot):
     bot.add_cog(main_cog(bot))
